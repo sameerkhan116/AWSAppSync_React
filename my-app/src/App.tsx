@@ -1,25 +1,12 @@
 import * as React from 'react';
-import { Form } from './Form';
-import { Connect } from 'aws-amplify-react';
-import { graphqlOperation } from 'aws-amplify';
-
-import { createBlog } from './graphql/mutations';
-import { Blogs } from './Blogs';
+import { Blogs } from './components/Blogs';
+import { ConnectedForm } from './components/ConnectedForm';
 
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
-        <Connect mutation={graphqlOperation(createBlog)}>
-          {({ mutation }: any) => (
-            <Form
-              onSubmit={async input => {
-                const response = await mutation({ input });
-                console.log(response);
-              }}
-            />
-          )}
-        </Connect>
+        <ConnectedForm />
         <Blogs />
       </div>
     );
